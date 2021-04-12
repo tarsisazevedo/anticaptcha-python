@@ -9,3 +9,11 @@ if captcha_text != 0:
     print("captcha text "+captcha_text)
 else:
     print("task finished with error "+solver.error_code)
+
+
+img = open("file_path.jpg", "rb")
+captcha_text = solver.solve_bytes_and_return_solution(img.read())
+if captcha_text != 0:
+    print("captcha text "+captcha_text)
+else:
+    print("task finished with error "+solver.error_code)

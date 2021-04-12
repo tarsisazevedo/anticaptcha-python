@@ -1,12 +1,16 @@
-from anticaptchaofficial.antinetworking import *
 from base64 import b64encode
+
+from anticaptchaofficial.antinetworking import *
+
 
 class imagecaptcha(antiNetworking):
 
     def solve_and_return_solution(self, file_path, **kwargs):
-        img = open(file_path, 'rb')
-        img_str = b64encode(img.read()).decode('ascii')
-        img.close()
+        with open(file_path, "rb") as img:
+            return self.solve_bytes_and_return_solutions(img.read(), **kwargs)
+
+    def solve_bytes_and_return_solution(self, bytes, **kwargs):
+        img_str = b64encode(bytes).decode('ascii')
         task_data = {
             "type": "ImageToTextTask",
             "body": img_str,
